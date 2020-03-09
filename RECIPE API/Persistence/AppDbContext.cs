@@ -16,7 +16,12 @@ namespace RECIPE_API.Persistence
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
+            builder.Entity<Recipe>()
+                .Property(p => p.Ingridients)
+                .HasConversion(
+                    v => string.Join(',', v),
+                    v => v.Split(',', StringSplitOptions.RemoveEmptyEntries)
+                );
         }
     }
 }
