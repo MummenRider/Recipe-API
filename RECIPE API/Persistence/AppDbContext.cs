@@ -22,6 +22,12 @@ namespace RECIPE_API.Persistence
                     v => string.Join(',', v),
                     v => v.Split(',', StringSplitOptions.RemoveEmptyEntries)
                 );
+
+            builder.Entity<Category>().ToTable("Categories");
+            builder.Entity<Category>().HasKey(p => p.CategoryId);
+            builder.Entity<Category>().Property(p => p.CategoryId).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Category>().Property(p => p.CategoryName).IsRequired().HasMaxLength(100);
+            builder.Entity<Category>().HasMany(p => p.Recipes).WithOne(p => p.Category).HasForeignKey(p => p.CategoryId);
         }
     }
 }
