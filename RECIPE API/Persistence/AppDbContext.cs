@@ -28,6 +28,9 @@ namespace RECIPE_API.Persistence
             builder.Entity<Category>().Property(p => p.CategoryId).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Category>().Property(p => p.CategoryName).IsRequired().HasMaxLength(100);
             builder.Entity<Category>().HasMany(p => p.Recipes).WithOne(p => p.Category).HasForeignKey(p => p.CategoryId);
+
+            builder.Entity<Recipe>().HasKey(p => p.RecipeId);
+            builder.Entity<Recipe>().Property(p => p.RecipeId).IsRequired().ValueGeneratedOnAdd();
         }
     }
 }
