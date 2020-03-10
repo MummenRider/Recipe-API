@@ -19,7 +19,7 @@ namespace RECIPE_API.Controllers
         {
             _categoryService = categoryService;
         }
-
+        [HttpGet]
         public async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
             var categories = await _categoryService.ListAsync();
