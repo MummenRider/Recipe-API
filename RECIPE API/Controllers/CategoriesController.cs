@@ -32,5 +32,22 @@ namespace RECIPE_API.Controllers
             var categoryDto = _mapper.Map<IEnumerable<Category>, IEnumerable<CategoryDto>>(categories);
             return categoryDto;
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AddCategoryAsync([FromBody] AddCategoryDto addCategoryDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+            
+            var category = _mapper.Map<AddCategoryDto, Category>(addCategoryDto);
+            var response = await _categoryService.AddCategoryAsync(category);
+
+            if (!response.Success)
+                return BadRequest();
+
+            var resource = _mapper.Map<Category, AddCategoryDto>(response.Category);
+
+            return Ok(resource);
+        }
     }
 }

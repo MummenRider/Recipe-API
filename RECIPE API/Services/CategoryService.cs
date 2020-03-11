@@ -1,6 +1,7 @@
 ﻿using RECIPE_API.Domain.Models;
 using RECIPE_API.Domain.Repositories;
 using RECIPE_API.Domain.Services;
+using RECIPE_API.Domain.Services.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,12 @@ namespace RECIPE_API.Services
         {
             _categoryRepository = categoryRepository;
         }
+
+        public Task<CategoryResponse> AddCategoryAsync(Category category)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<Category>> ListAsync()
         {
             return await _categoryRepository.ListAsync();
