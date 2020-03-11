@@ -11,6 +11,12 @@ namespace RECIPE_API.Persistence.Repositories
     public class CategoryRepository : BaseRepository, ICategoryRepository
     {
         public CategoryRepository(AppDbContext context) : base(context) { }
+
+        public async Task AddCategoryAsync(Category category)
+        {
+            await _context.Categories.AddAsync(category);
+        }
+
         /// <summary>
         /// Get all the categories from the database
         /// </summary>

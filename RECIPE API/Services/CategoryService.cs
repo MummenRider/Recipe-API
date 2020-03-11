@@ -18,9 +18,17 @@ namespace RECIPE_API.Services
             _categoryRepository = categoryRepository;
         }
 
-        public Task<CategoryResponse> AddCategoryAsync(Category category)
+        public async Task<CategoryResponse> AddCategoryAsync(Category category)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _categoryRepository.AddCategoryAsync(category);
+                return new CategoryResponse(category);
+            }
+            catch (Exception ex)
+            {
+                return new CategoryResponse($"An unexpected error occured: {ex.Message}");
+            }
         }
 
         public async Task<IEnumerable<Category>> ListAsync()
