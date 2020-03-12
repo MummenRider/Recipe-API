@@ -8,12 +8,12 @@ namespace RECIPE_API.Domain.Services.Responses
     public abstract class BaseResponse
     {
         public bool Success { get; protected set; }
-        public string Message { get; protected set; }
+        public string Error { get; protected set; }
 
-        public BaseResponse(bool success, string message)
+        public BaseResponse(bool success, string error)
         {
             Success = success;
-            Message = message;
+            Error = error;
         }
     }
 }

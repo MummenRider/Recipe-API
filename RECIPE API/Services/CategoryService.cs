@@ -12,17 +12,28 @@ namespace RECIPE_API.Services
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CategoryService(ICategoryRepository categoryRepository)
+        public CategoryService(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork)
         {
             _categoryRepository = categoryRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<CategoryResponse> AddCategoryAsync(Category category)
         {
+            var checkCategoryName = await _categoryRepository.FindByName(category);
+
+            if (checkCategoryName != null)
+            {
+                return new CategoryResponse($"Category name already exist in the database");
+            }
+
             try
             {
-                await _categoryRepository.AddCategoryAsync(category);
+                await _categoryRepository.AddAsync(category);
+                await _unitOfWork.SaveChanges();
+
                 return new CategoryResponse(category);
             }
             catch (Exception ex)

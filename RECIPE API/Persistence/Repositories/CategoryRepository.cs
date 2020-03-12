@@ -12,9 +12,14 @@ namespace RECIPE_API.Persistence.Repositories
     {
         public CategoryRepository(AppDbContext context) : base(context) { }
 
-        public async Task AddCategoryAsync(Category category)
+        public async Task AddAsync(Category category)
         {
             await _context.Categories.AddAsync(category);
+        }
+
+        public async Task<Category> FindByName(Category category)
+        {
+            return await _context.Categories.FirstOrDefaultAsync(p => p.CategoryName == category.CategoryName);
         }
 
         /// <summary>

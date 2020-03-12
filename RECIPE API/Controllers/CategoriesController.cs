@@ -43,7 +43,7 @@ namespace RECIPE_API.Controllers
             var response = await _categoryService.AddCategoryAsync(category);
 
             if (!response.Success)
-                return BadRequest();
+                return BadRequest(new { response.Error});
 
             var resource = _mapper.Map<Category, AddCategoryDto>(response.Category);
 

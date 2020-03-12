@@ -9,6 +9,7 @@ namespace RECIPE_API.Domain.Repositories
     public interface ICategoryRepository
     {
         Task<IEnumerable<Category>> ListAsync();
-        Task AddCategoryAsync(Category category);
+        Task AddAsync(Category category);
+        Task<Category> FindByName(Category category);
     }
 }
