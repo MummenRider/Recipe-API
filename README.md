@@ -1,5 +1,5 @@
 # Recipe.API
-
+A web API for food recipes
 ## Category
 |API endpoint | Description | Request body | Request response |
 | :----- | :----- | :----- |:----- |
