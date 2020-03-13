@@ -46,5 +46,10 @@ namespace RECIPE_API.Services
         {
             return await _categoryRepository.ListAsync();
         }
+
+        public Task<CategoryResponse> UpdateCategoryAsync(int id, Category category)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
