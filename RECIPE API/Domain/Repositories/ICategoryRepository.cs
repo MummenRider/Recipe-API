@@ -11,5 +11,8 @@ namespace RECIPE_API.Domain.Repositories
         Task<IEnumerable<Category>> ListAsync();
         Task AddAsync(Category category);
         Task<Category> FindByName(Category category);
+        Task<Category> FindById(int categoryId);
+
+        void Update(Category category);
     }
 }

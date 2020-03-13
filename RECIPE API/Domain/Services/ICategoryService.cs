@@ -12,6 +12,6 @@ namespace RECIPE_API.Domain.Services
         Task<IEnumerable<Category>> ListAsync();
         Task<CategoryResponse> AddCategoryAsync(Category category);
 
-        Task<CategoryResponse> UpdateCategoryAsync(int id, Category category);
+        Task<CategoryResponse> UpdateCategoryAsync(int categoryId, Category category);
     }
 }

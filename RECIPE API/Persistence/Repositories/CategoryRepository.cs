@@ -17,6 +17,11 @@ namespace RECIPE_API.Persistence.Repositories
             await _context.Categories.AddAsync(category);
         }
 
+        public async Task<Category> FindById(int categoryId)
+        {
+            return await _context.Categories.FindAsync(categoryId);
+        }
+
         public async Task<Category> FindByName(Category category)
         {
             return await _context.Categories.FirstOrDefaultAsync(p => p.CategoryName == category.CategoryName);
@@ -29,6 +34,11 @@ namespace RECIPE_API.Persistence.Repositories
         public async Task<IEnumerable<Category>> ListAsync()
         {
             return await _context.Categories.ToListAsync();
+        }
+
+        public void Update(Category category)
+        {
+            _context.Categories.Update(category);
         }
     }
 }
