@@ -42,6 +42,11 @@ namespace RECIPE_API.Services
             }
         }
 
+        public Task<CategoryResponse> DeleteCategoryAsync(int categoryId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<Category>> ListAsync()
         {
             return await _categoryRepository.ListAsync();

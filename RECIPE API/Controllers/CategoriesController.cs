@@ -34,7 +34,7 @@ namespace RECIPE_API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCategoryAsync([FromBody] SaveCategoryDto addCategoryDto)
+        public async Task<IActionResult> AddCategoryAsync(SaveCategoryDto addCategoryDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
@@ -50,22 +50,38 @@ namespace RECIPE_API.Controllers
             return Ok(resource);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCategoryAsync(int id, SaveCategoryDto categoryDto)
+        [HttpPut("{categoryId}")]
+        public async Task<IActionResult> UpdateCategoryAsync(int categoryId, SaveCategoryDto categoryDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
             var catDto = _mapper.Map<SaveCategoryDto, Category>(categoryDto);
 
-            var request = await _categoryService.UpdateCategoryAsync(id, catDto);
+            var response = await _categoryService.UpdateCategoryAsync(categoryId, catDto);
 
-            if (!request.Success)
-                return BadRequest(request.Error);
+            if (!response.Success)
+                return BadRequest(response.Error);
 
-            var category = _mapper.Map<Category, SaveCategoryDto>(request.Category);
+            var category = _mapper.Map<Category, SaveCategoryDto>(response.Category);
 
             return Ok(category);
+        }
+
+        [HttpDelete("{categoryId}")]
+        public async Task<IActionResult> DeleteCategoryAsync(int categoryId)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var response = await _categoryService.DeleteCategoryAsync(categoryId);
+
+            if (!response.Success)
+                return BadRequest(response.Error);
+
+            var resource = _mapper.Map<Category, CategoryDto>(response.Category);
+
+            return Ok(resource);
         }
     }
 }
