@@ -14,5 +14,6 @@ namespace RECIPE_API.Domain.Repositories
         Task<Category> FindById(int categoryId);
 
         void Update(Category category);
+        void Delete(Category category);
     }
 }

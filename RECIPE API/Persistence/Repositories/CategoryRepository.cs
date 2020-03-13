@@ -17,6 +17,11 @@ namespace RECIPE_API.Persistence.Repositories
             await _context.Categories.AddAsync(category);
         }
 
+        public void Delete(Category category)
+        {
+            _context.Categories.Remove(category);
+        }
+
         public async Task<Category> FindById(int categoryId)
         {
             return await _context.Categories.FindAsync(categoryId);

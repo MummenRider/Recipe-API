@@ -42,9 +42,22 @@ namespace RECIPE_API.Services
             }
         }
 
-        public Task<CategoryResponse> DeleteCategoryAsync(int categoryId)
+        public async Task<CategoryResponse> DeleteCategoryAsync(int categoryId)
         {
-            throw new NotImplementedException();
+            var existingCategory = await _categoryRepository.FindById(categoryId);
+            if (existingCategory == null)
+                return new CategoryResponse($"Category not found");
+
+            try
+            {
+                _categoryRepository.Delete(existingCategory);
+                await _unitOfWork.SaveChanges();
+                return new CategoryResponse(existingCategory);
+            }
+            catch (Exception ex)
+            {
+                return new CategoryResponse($"An unexpected error occured: {ex.Message}");
+            }
         }
 
         public async Task<IEnumerable<Category>> ListAsync()
