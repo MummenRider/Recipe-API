@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RECIPE_API.DataTransferObjects
 {
-    public class AddCategoryDto
+    public class SaveCategoryDto
     {
         [MaxLength(50)]
         [Required]

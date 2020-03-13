@@ -34,20 +34,38 @@ namespace RECIPE_API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCategoryAsync([FromBody] AddCategoryDto addCategoryDto)
+        public async Task<IActionResult> AddCategoryAsync([FromBody] SaveCategoryDto addCategoryDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
-            
-            var category = _mapper.Map<AddCategoryDto, Category>(addCategoryDto);
+
+            var category = _mapper.Map<SaveCategoryDto, Category>(addCategoryDto);
             var response = await _categoryService.AddCategoryAsync(category);
 
             if (!response.Success)
-                return BadRequest(new { response.Error});
+                return BadRequest(new { response.Error });
 
-            var resource = _mapper.Map<Category, AddCategoryDto>(response.Category);
+            var resource = _mapper.Map<Category, SaveCategoryDto>(response.Category);
 
             return Ok(resource);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateCategoryAsync(int id, SaveCategoryDto categoryDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var catDto = _mapper.Map<SaveCategoryDto, Category>(categoryDto);
+
+            var request = await _categoryService.UpdateCategoryAsync(id, catDto);
+
+            if (!request.Success)
+                return BadRequest(request.Error);
+
+            var category = _mapper.Map<Category, SaveCategoryDto>(request.Category);
+
+            return Ok(category);
         }
     }
 }

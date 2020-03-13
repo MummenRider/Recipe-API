@@ -13,7 +13,7 @@ namespace RECIPE_API.Mapping
         public ModelProfileToDto()
         {
             CreateMap<Category, CategoryDto>();
-            CreateMap<Category, AddCategoryDto>();
+            CreateMap<Category, SaveCategoryDto>();
         }
     }
 }
