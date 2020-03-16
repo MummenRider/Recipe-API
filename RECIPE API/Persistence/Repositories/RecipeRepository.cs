@@ -14,7 +14,7 @@ namespace RECIPE_API.Persistence.Repositories
     
         public async Task<IEnumerable<Recipe>> ListAsync()
         {
-            return await _context.Recipes.ToListAsync();
+            return await _context.Recipes.Include(category => category.Category).ToListAsync();
         }
     }
 }
