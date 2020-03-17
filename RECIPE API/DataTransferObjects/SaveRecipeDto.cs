@@ -11,5 +11,6 @@ namespace RECIPE_API.DataTransferObjects
         public string Summary { get; set; }
         public string ImageUrl { get; set; }
         public IList<string> Ingridients { get; set; }
+        public int CategoryId { get; set; }
     }
 }

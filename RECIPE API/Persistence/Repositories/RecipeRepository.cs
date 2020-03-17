@@ -11,7 +11,12 @@ namespace RECIPE_API.Persistence.Repositories
     public class RecipeRepository : BaseRepository, IRecipeRepository
     {
         public RecipeRepository(AppDbContext context) : base(context) { }
-    
+
+        public async Task AddRecipe(Recipe recipe)
+        {
+            await _context.Recipes.AddAsync(recipe);
+        }
+
         public async Task<IEnumerable<Recipe>> ListAsync()
         {
             return await _context.Recipes.Include(category => category.Category).ToListAsync();

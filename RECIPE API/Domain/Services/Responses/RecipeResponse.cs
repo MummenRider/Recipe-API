@@ -10,10 +10,10 @@ namespace RECIPE_API.Domain.Services.Responses
     {
         public Recipe Recipe { get; private set; }
 
-        private RecipeResponse(bool success, string error, Recipe recipe) : base(success, error) { Recipe = recipe; }
+        private RecipeResponse(bool success, string message, Recipe recipe) : base(success, message) { Recipe = recipe; }
 
         public RecipeResponse(Recipe recipe) : this(true, String.Empty, recipe) { }
-        public RecipeResponse(string error) : this(true, error, null) { }
+        public RecipeResponse(string message) : this(false, message, null) { }
 
   
     }

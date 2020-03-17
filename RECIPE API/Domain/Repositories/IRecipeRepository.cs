@@ -9,5 +9,6 @@ namespace RECIPE_API.Domain.Repositories
     public interface IRecipeRepository
     {
         Task<IEnumerable<Recipe>> ListAsync();
+        Task AddRecipe(Recipe recipe);
     }
 }

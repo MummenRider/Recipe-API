@@ -16,6 +16,7 @@ namespace RECIPE_API.Mapping
             CreateMap<SaveCategoryDto, Category>();
 
             CreateMap<RecipesDto, Recipe>();
+            CreateMap<SaveRecipeDto, Recipe>();
         }
     }
 }

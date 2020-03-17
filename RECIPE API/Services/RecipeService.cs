@@ -12,15 +12,27 @@ namespace RECIPE_API.Services
     public class RecipeService : IRecipeService
     {
         private readonly IRecipeRepository _recipeRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public RecipeService(IRecipeRepository recipeRepository)
+        public RecipeService(IRecipeRepository recipeRepository, IUnitOfWork unitOfWork)
         {
             _recipeRepository = recipeRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public Task<RecipeResponse> AddAsync(Recipe recipe)
+        public async Task<RecipeResponse> AddAsync(Recipe recipe)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _recipeRepository.AddRecipe(recipe);
+                await _unitOfWork.SaveChanges();
+
+                return new RecipeResponse(recipe);
+            }
+            catch (Exception ex)
+            {
+                return new RecipeResponse($"An unexpected error occured: {ex.Message}");
+            }
         }
 
         public async Task<IEnumerable<Recipe>> ListAsync()
