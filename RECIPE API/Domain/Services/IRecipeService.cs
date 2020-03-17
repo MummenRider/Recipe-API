@@ -11,5 +11,7 @@ namespace RECIPE_API.Domain.Services
     {
         Task<IEnumerable<Recipe>> ListAsync();
         Task<RecipeResponse> AddAsync(Recipe recipe);
+        Task<Recipe> FindById(int recipeId);
+        Task<RecipeResponse> UpdateAsync(int recipeId, Recipe recipe);
     }
 }

@@ -40,9 +40,19 @@ namespace RECIPE_API.Services
             }
         }
 
+        public Task<Recipe> FindById(int recipeId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<Recipe>> ListAsync()
         {
             return await _recipeRepository.ListAsync();
+        }
+
+        public async Task UpdateAsync(int recipeId, Recipe recipe)
+        {
+            throw new NotImplementedException();
         }
     }
 }

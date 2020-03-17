@@ -50,5 +50,22 @@ namespace RECIPE_API.Controllers
             return Ok(resource);
         }
 
+        [HttpPut("{recipeId}")]
+        public async Task<IActionResult> UpdateAsync(int recipeId, SaveRecipeDto saveRecipeDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var recipe = _mapper.Map<SaveRecipeDto, Recipe>(saveRecipeDto);
+            var response = await _recipeService.UpdateAsync(recipeId, recipe);
+
+            if (!response.Success)
+                return BadRequest(response.Error);
+
+            var resources = _mapper.Map<Recipe, SaveRecipeDto>(response.Recipe);
+
+            return Ok(resources);
+        }
+
     }
 }

@@ -21,5 +21,10 @@ namespace RECIPE_API.Persistence.Repositories
         {
             return await _context.Recipes.Include(category => category.Category).ToListAsync();
         }
+
+        public void Update(Recipe recipe)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

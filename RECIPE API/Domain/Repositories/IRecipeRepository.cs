@@ -10,5 +10,6 @@ namespace RECIPE_API.Domain.Repositories
     {
         Task<IEnumerable<Recipe>> ListAsync();
         Task AddRecipe(Recipe recipe);
+        void Update(Recipe recipe);
     }
 }
