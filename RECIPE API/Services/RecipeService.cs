@@ -40,19 +40,37 @@ namespace RECIPE_API.Services
             }
         }
 
-        public Task<Recipe> FindById(int recipeId)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<IEnumerable<Recipe>> ListAsync()
         {
             return await _recipeRepository.ListAsync();
         }
 
-        public async Task UpdateAsync(int recipeId, Recipe recipe)
+        public async Task<RecipeResponse> UpdateAsync(int recipeId, Recipe recipe)
         {
-            throw new NotImplementedException();
+            var existingRecipe = await _recipeRepository.FindById(recipeId);
+            if (existingRecipe == null)
+                return new RecipeResponse($"Recipe could not be found");
+
+            var existingCategory = await _categoryRepository.FindById(existingRecipe.CategoryId);
+            if(existingCategory == null)
+                return new RecipeResponse($"Invalid category number");
+
+            existingRecipe.Title = recipe.Title;
+            existingRecipe.Summary = recipe.Summary;
+            existingRecipe.ImageUrl = recipe.ImageUrl;
+            existingRecipe.Ingridients = recipe.Ingridients;
+
+            try
+            {
+                _recipeRepository.Update(existingRecipe);
+                await _unitOfWork.SaveChanges();
+
+                return new RecipeResponse(existingRecipe);
+            }
+            catch (Exception ex)
+            {
+                return new RecipeResponse($"An unexpected error occured: {ex.Message}");
+            }
         }
     }
 }

@@ -17,6 +17,11 @@ namespace RECIPE_API.Persistence.Repositories
             await _context.Recipes.AddAsync(recipe);
         }
 
+        public async Task<Recipe> FindById(int recipeId)
+        {
+            return await _context.Recipes.FindAsync(recipeId);
+        }
+
         public async Task<IEnumerable<Recipe>> ListAsync()
         {
             return await _context.Recipes.Include(category => category.Category).ToListAsync();
@@ -24,7 +29,7 @@ namespace RECIPE_API.Persistence.Repositories
 
         public void Update(Recipe recipe)
         {
-            throw new NotImplementedException();
+            _context.Recipes.Update(recipe);
         }
     }
 }
