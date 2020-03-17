@@ -13,15 +13,20 @@ namespace RECIPE_API.Services
     {
         private readonly IRecipeRepository _recipeRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public RecipeService(IRecipeRepository recipeRepository, IUnitOfWork unitOfWork)
+        public RecipeService(IRecipeRepository recipeRepository, IUnitOfWork unitOfWork, ICategoryRepository categoryRepository)
         {
             _recipeRepository = recipeRepository;
             _unitOfWork = unitOfWork;
+            _categoryRepository = categoryRepository;
         }
-
+        
         public async Task<RecipeResponse> AddAsync(Recipe recipe)
         {
+            var checkCategory = await _categoryRepository.FindById(recipe.CategoryId);
+            if(checkCategory == null)
+                return new RecipeResponse($"Category could not be found");
             try
             {
                 await _recipeRepository.AddRecipe(recipe);
