@@ -51,7 +51,7 @@ namespace RECIPE_API.Services
             if (existingRecipe == null)
                 return new RecipeResponse($"Recipe could not be found");
 
-            var existingCategory = await _categoryRepository.FindById(existingRecipe.CategoryId);
+            var existingCategory = await _categoryRepository.FindById(recipe.CategoryId);
             if(existingCategory == null)
                 return new RecipeResponse($"Invalid category number");
 

@@ -60,7 +60,7 @@ namespace RECIPE_API.Controllers
             var response = await _recipeService.UpdateAsync(recipeId, recipe);
 
             if (!response.Success)
-                return BadRequest(response.Error);
+                return BadRequest(new { response.Error });
 
             var resources = _mapper.Map<Recipe, SaveRecipeDto>(response.Recipe);
 
