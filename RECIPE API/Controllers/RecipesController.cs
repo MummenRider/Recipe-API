@@ -67,5 +67,21 @@ namespace RECIPE_API.Controllers
             return Ok(resources);
         }
 
+        [HttpDelete("{recipeId}")]
+        public async Task<IActionResult> DeleteAsync(int recipeId)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var response = await _recipeService.DeleteAsync(recipeId);
+
+            if (!response.Success)
+                return BadRequest(new { response.Error });
+
+            var resource = _mapper.Map<Recipe, RecipesDto>(response.Resource);
+
+            return Ok(resource);
+        }
+
     }
 }

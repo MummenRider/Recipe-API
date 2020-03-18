@@ -40,6 +40,11 @@ namespace RECIPE_API.Services
             }
         }
 
+        public Task<RecipeResponse> DeleteAsync(int recipeId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<Recipe>> ListAsync()
         {
             return await _recipeRepository.ListAsync();

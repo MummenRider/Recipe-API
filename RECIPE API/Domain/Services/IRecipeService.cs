@@ -12,5 +12,6 @@ namespace RECIPE_API.Domain.Services
         Task<IEnumerable<Recipe>> ListAsync();
         Task<RecipeResponse> AddAsync(Recipe recipe);
         Task<RecipeResponse> UpdateAsync(int recipeId, Recipe recipe);
+        Task<RecipeResponse> DeleteAsync(int recipeId);
     }
 }
