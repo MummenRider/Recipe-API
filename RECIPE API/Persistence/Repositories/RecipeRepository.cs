@@ -17,9 +17,14 @@ namespace RECIPE_API.Persistence.Repositories
             await _context.Recipes.AddAsync(recipe);
         }
 
+        public void Delete(Recipe recipe)
+        {
+            _context.Recipes.Remove(recipe);
+        }
+
         public async Task<Recipe> FindById(int recipeId)
         {
-            return await _context.Recipes.FindAsync(recipeId);
+            return await _context.Recipes.Include(p => p.Category).FirstOrDefaultAsync(p => p.RecipeId == recipeId);
         }
 
         public async Task<IEnumerable<Recipe>> ListAsync()

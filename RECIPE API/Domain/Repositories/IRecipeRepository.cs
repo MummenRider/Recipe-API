@@ -12,5 +12,6 @@ namespace RECIPE_API.Domain.Repositories
         Task AddRecipe(Recipe recipe);
         Task<Recipe> FindById(int recipeId);
         void Update(Recipe recipe);
+        void Delete(Recipe recipe);
     }
 }

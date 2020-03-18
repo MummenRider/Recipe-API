@@ -40,9 +40,24 @@ namespace RECIPE_API.Services
             }
         }
 
-        public Task<RecipeResponse> DeleteAsync(int recipeId)
+        public async Task<RecipeResponse> DeleteAsync(int recipeId)
         {
-            throw new NotImplementedException();
+            var existingRecipe = await _recipeRepository.FindById(recipeId);
+            if (existingRecipe == null)
+                return new RecipeResponse($"Recipe could not be found");
+
+            try
+            {
+                _recipeRepository.Delete(existingRecipe);
+                await _unitOfWork.SaveChanges();
+
+                return new RecipeResponse(existingRecipe);
+            }
+            catch (Exception ex)
+            {
+                return new RecipeResponse($"An unexpected error occured: {ex.Message}");
+            }
+
         }
 
         public async Task<IEnumerable<Recipe>> ListAsync()
