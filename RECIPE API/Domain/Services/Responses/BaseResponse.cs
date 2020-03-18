@@ -5,15 +5,24 @@ using System.Threading.Tasks;
 
 namespace RECIPE_API.Domain.Services.Responses
 {
-    public abstract class BaseResponse
+    public abstract class BaseResponse<T>
     {
-        public bool Success { get; protected set; }
-        public string Error { get; protected set; }
+        public bool Success { get; private set; }
+        public string Error { get; private set; }
+        public T Resource { get; private set; }
 
-        public BaseResponse(bool success, string error)
+        protected BaseResponse(T resource)
         {
-            Success = success;
+            Success = true;
+            Error = string.Empty;
+            Resource = resource;
+        }
+
+        protected BaseResponse(string error)
+        {
+            Success = false;
             Error = error;
+            Resource = default;
         }
     }
 }

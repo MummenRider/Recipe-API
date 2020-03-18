@@ -6,15 +6,11 @@ using System.Threading.Tasks;
 
 namespace RECIPE_API.Domain.Services.Responses
 {
-    public class RecipeResponse : BaseResponse
+    public class RecipeResponse : BaseResponse<Recipe>
     {
-        public Recipe Recipe { get; private set; }
+        public RecipeResponse(Recipe recipe) : base(recipe) { }
+        public RecipeResponse(string message) : base(message) { }
 
-        private RecipeResponse(bool success, string message, Recipe recipe) : base(success, message) { Recipe = recipe; }
 
-        public RecipeResponse(Recipe recipe) : this(true, String.Empty, recipe) { }
-        public RecipeResponse(string message) : this(false, message, null) { }
-
-  
     }
 }

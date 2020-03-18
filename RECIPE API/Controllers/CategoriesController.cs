@@ -45,8 +45,8 @@ namespace RECIPE_API.Controllers
             if (!response.Success)
                 return BadRequest(new { response.Error });
 
-            var resource = _mapper.Map<Category, SaveCategoryDto>(response.Category);
-
+            var resource = _mapper.Map<Category, CategoryDto>(response.Resource);
+            
             return Ok(resource);
         }
 
@@ -63,7 +63,7 @@ namespace RECIPE_API.Controllers
             if (!response.Success)
                 return BadRequest(response.Error);
 
-            var category = _mapper.Map<Category, SaveCategoryDto>(response.Category);
+            var category = _mapper.Map<Category, CategoryDto>(response.Resource);
 
             return Ok(category);
         }
@@ -79,7 +79,7 @@ namespace RECIPE_API.Controllers
             if (!response.Success)
                 return BadRequest(response.Error);
 
-            var resource = _mapper.Map<Category, CategoryDto>(response.Category);
+            var resource = _mapper.Map<Category, CategoryDto>(response.Resource);
 
             return Ok(resource);
         }

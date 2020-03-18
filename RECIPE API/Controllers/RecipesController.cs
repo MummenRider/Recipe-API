@@ -45,7 +45,7 @@ namespace RECIPE_API.Controllers
             if (!response.Success)
                 return BadRequest(new { response.Error });
 
-            var resource = _mapper.Map<Recipe, SaveRecipeDto>(response.Recipe);
+            var resource = _mapper.Map<Recipe, RecipesDto>(response.Resource);
 
             return Ok(resource);
         }
@@ -62,7 +62,7 @@ namespace RECIPE_API.Controllers
             if (!response.Success)
                 return BadRequest(new { response.Error });
 
-            var resources = _mapper.Map<Recipe, SaveRecipeDto>(response.Recipe);
+            var resources = _mapper.Map<Recipe, RecipesDto>(response.Resource);
 
             return Ok(resources);
         }
