@@ -32,14 +32,11 @@ namespace RECIPE_API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<AppDbContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("DevConnection"));
-            });
+            services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IRecipeRepository, RecipeRepository>();
-            
+
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IRecipeService, RecipeService>();
 
@@ -58,15 +55,12 @@ namespace RECIPE_API
             }
 
             app.UseHttpsRedirection();
-            
+
             app.UseRouting();
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }
 }
