@@ -9,6 +9,6 @@ namespace RECIPE_API.Domain.Services
 {
     public interface IUserService
     {
-        Task<UserResponse> AddUserAsync(User user);
+        Task<UserResponse> AddUserAsync(User user, params ERole[] eRoles);
     }
 }
