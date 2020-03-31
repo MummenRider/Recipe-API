@@ -12,7 +12,8 @@ namespace RECIPE_API.Persistence
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
-
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -81,7 +82,7 @@ namespace RECIPE_API.Persistence
 
                     }
                 );
-             
+            builder.Entity<UserRole>().HasKey(p => new { p.UserId, p.RoleId });
         }
     }
 }
