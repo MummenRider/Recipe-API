@@ -8,6 +8,6 @@ namespace RECIPE_API.Domain.Repositories
 {
     public interface IUserRepository
     {
-        Task<User> AddUserAsync(User user, ERole[] eRoles);
+        Task AddUserAsync(User user, ERole[] eRoles);
     }
 }

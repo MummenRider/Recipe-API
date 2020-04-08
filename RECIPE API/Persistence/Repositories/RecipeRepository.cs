@@ -14,7 +14,7 @@ namespace RECIPE_API.Persistence.Repositories
 
         public async Task AddRecipe(Recipe recipe)
         {
-            await _context.Recipes.AddAsync(recipe);
+            await _context.Recipes.AddAsync(recipe);    
         }
 
         public void Delete(Recipe recipe)
